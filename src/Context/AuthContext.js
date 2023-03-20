@@ -59,42 +59,36 @@ export const AuthProvider = ({children}) => {
     }
 
     let updateToken = async ()=> {
-        console.log('Update Called')
-        let response = await fetch('http://192.168.0.169:8000/token/refresh/', {
-            method:'POST',
-            headers:{
-              'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'refresh': refresh})
-        })
-        
-        let data = await response.json();
-        
-        if (response.status === 200){
-          setAccess(data.access)
-          localStorage.setItem('access', JSON.stringify(data.access))
-        }else{
-            logoutUser()
-            console.log("loged Out")
-        }
-
-        // fetch('http://192.168.0.169:8000/token/refresh', {
-        //   method: 'POST',
-        //   headers:{
-        //     'Content-Type':'application/json'
-        //   },
-        //   body:JSON.stringify({'refresh': refresh})
-        // }).then((res)=>{res.json()}).then((data)=>{localStorage.setItem('access', JSON.stringify(data.access))}).catch(()=>logoutUser())
+      console.log('Update Called')
+      let response = await fetch('http://192.168.0.169:8000/token/refresh/', {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({'refresh': refresh})
+      })
+      
+      let data = await response.json();
+      
+      if (response.status === 200){
+        setAccess(data.access)
+        localStorage.setItem('access', JSON.stringify(data.access))
+        return 'success';
+      }else{
+          logoutUser()
+          console.log("loged Out")
+          return 'failure'
+      }
     }
 
     let contextData = {
-        user:user,
-        userType: userType,
-        access: access,
-        refresh: refresh,
-        loginUser:loginUser,
-        logoutUser:logoutUser,
-        updateToken: updateToken
+        user,
+        userType,
+        access,
+        refresh,
+        loginUser,
+        logoutUser,
+        updateToken
     }
 
     return(

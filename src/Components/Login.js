@@ -5,7 +5,8 @@ import './Login.css';
 const Login = () => {
   let {loginUser} = useContext(AuthContext)
   
-  return (<>
+  return (
+  <>
     <div className='sign-in-wrapper'>
       <div className="form-container">
         <div className="form-heading">
