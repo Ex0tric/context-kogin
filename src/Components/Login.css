@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+body{font-family: 'Montserrat', sans-serif;}
+
+.montserrat{font-family: 'Montserrat', sans-serif; }
+.sign-heading{ font-weight: bold; font-family: 'Montserrat', sans-serif; font-size: 40px;}
+.sign-in-wrapper{ height: 100vh; justify-content: center; display: flex; align-items: center; flex-direction: column; background-color: #007bff;}
+.form-container{background-color: #fff; padding: 60px 50px; border-radius: 20px;box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+.sign-in-btn{border-radius: 50px; border: 1px solid #FF4B2B; background-color: #FF4B2B; color: #FFFFFF; font-size: 14px; font-weight: bold; padding: 10px 40px; letter-spacing: 1px; text-transform: uppercase; transition: transform 80ms ease-in;}
+.sign-in-btn:hover{background-color: transparent; color: #FF4B2B; transition: background-color .3s ease-in-out;}
+.username, .password{background-color: #eee; border: none; padding: 12px 15px; margin: 8px 0;}
+.username::placeholder, .password::placeholder{font-family: 'Montserrat', sans-serif;}
+
+@media (max-width: 1200px){
+}
+
+@media (max-width: 992px){
+  .form-container{ padding: 50px 40px; }
+  .sign-heading{  font-size: 35px;}
+}
+
+@media (max-width: 768px){
+  .form-container{ padding: 40px 30px; }
+  .sign-heading{  font-size: 30px;}
+}
+
+@media (max-width: 576px){
+  .form-container{ padding: 30px; }
+}

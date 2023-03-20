@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
@@ -8,19 +8,19 @@ export default AuthContext;
 
 export const AuthProvider = ({children}) => {
 
-    let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
-    // console.log(JSON.parse(localStorage.getItem('authTokens')))
-    
-    let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')).username: null)
-    // console.log(JSON.parse(localStorage.getItem('authTokens')).username)
+    let [access, setAccess] = useState(()=> localStorage.getItem('access') ? JSON.parse(localStorage.getItem('access')) : null)
 
-    let [loading, setLoading] = useState(true)
+    let [refresh, setRefresh] = useState(()=> localStorage.getItem('refresh') ? JSON.parse(localStorage.getItem('refresh')) : null)
+    
+    let [user, setUser] = useState(()=> localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')): null)
+
+    let [userType, setUserType] = useState(()=> localStorage.getItem('user_type') ? JSON.parse(localStorage.getItem('user_type')): null)
 
     let navigate = useNavigate();
 
     let loginUser = async (e)=> {
         e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/user/login/', {
+        let response = await fetch('http://192.168.0.169:8000/user/login/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -30,85 +30,76 @@ export const AuthProvider = ({children}) => {
         let data = await response.json()
 
         if(response.status === 200){
-            console.log(data)
-            setAuthTokens(data)
+            setAccess(data.access)
+            setRefresh(data.refresh)
             setUser(data.username)
-            localStorage.setItem('authTokens', JSON.stringify(data))
-            switch(data.username){
-              case 'root': return navigate('/superadmin');
-              case 'partner': return navigate('/partner');
-              default: return 'Invalid User'
+            setUserType(data.user_type)
+            localStorage.setItem('access', JSON.stringify(data.access))
+            localStorage.setItem('refresh', JSON.stringify(data.refresh))
+            localStorage.setItem('user', JSON.stringify(data.username))
+            localStorage.setItem('user_type', JSON.stringify(data.user_type))
+
+            switch(data.user_type){
+              case 'is_super_admin': return navigate('/superadmin');
+              case 'is_partner': return navigate('/partner');
+              default: return 'Invalid User';
             }
         }else{
-            alert('Something went wrong!')
+            alert('Wrong Username Password!')
         }
-
     }
 
-
     let logoutUser = () => {
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.clear()
-        navigate('/')
+      setAccess(null)
+      setRefresh(null)
+      setUser(null)
+      setUserType(null)
+      localStorage.clear()
+      navigate('/')
     }
 
     let updateToken = async ()=> {
         console.log('Update Called')
-        let response = await fetch('http://127.0.0.1:8000/token/refresh/', {
+        let response = await fetch('http://192.168.0.169:8000/token/refresh/', {
             method:'POST',
             headers:{
-                'Content-Type':'application/json'
+              'Content-Type':'application/json'
             },
-            body:JSON.stringify({'refresh':authTokens?.refresh})
+            body:JSON.stringify({'refresh': refresh})
         })
-
-        let data = await response.json()
+        
+        let data = await response.json();
         
         if (response.status === 200){
-            setAuthTokens(data)
-            setUser(data.username)
-            localStorage.setItem('authTokens', JSON.stringify(data))
+          setAccess(data.access)
+          localStorage.setItem('access', JSON.stringify(data.access))
         }else{
             logoutUser()
             console.log("loged Out")
         }
 
-        if(loading){
-          setLoading(false)
-        }
+        // fetch('http://192.168.0.169:8000/token/refresh', {
+        //   method: 'POST',
+        //   headers:{
+        //     'Content-Type':'application/json'
+        //   },
+        //   body:JSON.stringify({'refresh': refresh})
+        // }).then((res)=>{res.json()}).then((data)=>{localStorage.setItem('access', JSON.stringify(data.access))}).catch(()=>logoutUser())
     }
 
     let contextData = {
         user:user,
-        authTokens:authTokens,
+        userType: userType,
+        access: access,
+        refresh: refresh,
         loginUser:loginUser,
         logoutUser:logoutUser,
+        updateToken: updateToken
     }
 
-
-    useEffect(()=> {
-
-      if(loading){
-        updateToken()
-      }
-
-      console.log('Effect Called')
-
-      let interval = setInterval(()=>{
-        if(authTokens){
-          console.log('Interval Called')
-          updateToken();
-        }
-      }, 5000)
-      return ()=>{clearInterval(interval)}
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[authTokens, loading])
-
     return(
-      <AuthContext.Provider value={contextData} >
-        { loading ? null : children}
+      <AuthContext.Provider value={contextData} > 
+        {children}
       </AuthContext.Provider>
     )
 }
