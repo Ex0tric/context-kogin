@@ -1,44 +1,49 @@
 import {useContext, useEffect, useState} from 'react'
 import AuthContext from '../Context/AuthContext'
+import Header from './Header';
+import Sidebar from './Sidebar';
+import SuperDashboard from './SuperDashboard';
 
 function SuperAdmin() {
 
-  let { logoutUser, user, userType, updateToken} = useContext(AuthContext)
-  let {isLoading, setLoading} = useState(true)
+  let { userType, updateToken } = useContext(AuthContext)
+  // let { isLoading, setLoading } = useState(true)
 
-  document.title = 'Super Adminz'
+  document.title = 'Super Admin';
 
   useEffect(()=>{
-
-    let status = updateToken()
-    if(status === 'success'){
-      setLoading(false)
-    }else{
-      setLoading('failure')
-    }
-  
+    updateToken()
+    console.log('token updated')
+    // setLoading(false)
+    // status.then((status)=>{
+    //   if(status === 'success'){
+    //     setLoading(false)
+    //   }else{
+    //     setLoading('failure')
+    //   }
+    // })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])   
 
-    if(isLoading){
-      return <h1>Loading...</h1>;
-    }else if(isLoading === 'failure'){
-      return 'Failure';
-    }
-    else{
+    // if(isLoading){
+      // return <h1>Loading...</h1>;
+    // }else if(isLoading === 'failure'){
+    //   return 'Failure';
+    // }
+    // else{
       return (
         <>
           {
             userType === 'is_super_admin'? 
-            <div className='main'>
-              <h1 className='text-center'>Welcome, {user.slice(0,1).toUpperCase() + user.slice(1)} </h1>
-              <button onClick={logoutUser}>Logout</button>
-            </div>
+            <>
+              <SuperDashboard/>
+            </>
             : 
             <h1>You Don't Have Access of SuperAdmin</h1>
           }
         </>
       )
-    }
+    // }
 
 }
 

@@ -3,7 +3,10 @@ import AuthContext from '../Context/AuthContext'
 import './Login.css';
 
 const Login = () => {
+  
   let {loginUser} = useContext(AuthContext)
+
+  document.title = 'Login'
   
   return (
   <>
@@ -19,7 +22,7 @@ const Login = () => {
         <div className="form-group">
           <input type="password" name="password" placeholder="Enter Password"  className='password '/>
         </div>
-        <div className="form-group text-center">
+        <div className="text-center">
           <input type="submit" value='Sign In' className='sign-in-btn montserrat' />
         </div>
         </form>

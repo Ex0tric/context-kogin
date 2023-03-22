@@ -5,20 +5,27 @@ import Partner from './Components/Partner';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoutes from './Components/PrivateRoutes';
 import { AuthProvider } from './Context/AuthContext';
+import Sidebar from './Components/Sidebar';
+import Header from './Components/Header';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-          <Routes>
-            <Route path='/' element={<Login/>}/>
-            <Route element={<PrivateRoutes/>}>
-              <Route element={<SuperAdmin/>} path='/superadmin'/>
-              <Route element={<Partner/>}  path='/partner'/>
-            </Route>
-          </Routes>
-      </Router> 
-    </AuthProvider>
+    <>
+        <Router>
+      <AuthProvider>
+          
+            <Routes>
+              <Route path='/' element={<Login/>}/>
+              <Route element={<PrivateRoutes/>}>
+                <Route element={<SuperAdmin/>} path='/superadmin'/>
+                <Route element={<Partner/>}  path='/partner'/>  
+                <Route element={<Sidebar/>}></Route>
+              </Route>
+            </Routes>
+          
+      </AuthProvider>
+        </Router> 
+    </>
   );
 }
 

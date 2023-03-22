@@ -1,0 +1,6 @@
+.super-dashboard{margin-left: 100px !important;}
+.content-header{padding: 15px;}
+.card{box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2); margin-bottom: 1rem;}
+.small-box{padding: 20px ; border-radius: 10px; color: #fff;}
+.small-box:hover{opacity: 0.8;}
+.card-header{background-color: #fff !important;}

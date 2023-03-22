@@ -1,0 +1,17 @@
+.brand-image{ width: 40px; height: 40px;}
+a:hover{text-decoration: none !important;}
+
+.sidebar-titles{display: none; transition: display .5s ease-in-out; }
+.siderbar:hover .sidebar-titles{display: inline-block; }
+
+.siderbar{width: 100px; background-color: #353535; height: 100vh; overflow-y: auto; transition: width ease-in-out;top: 0; left: 0; z-index: 10;}
+.siderbar:hover{width: 260px;}
+.hover:hover{background-color: #454545; text-decoration: none !important; border-radius: 10px;}
+.sidebar-header{border-bottom: 1px solid grey; margin-bottom: 15px;}
+
+.drop-arrow{right: 10px ;top: 20px; transform: translateY(-50%);}
+
+.siderbar::-webkit-scrollbar {display: none;}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.siderbar {-ms-overflow-style: none;  /* IE and Edge */ scrollbar-width: none;  /* Firefox */}
