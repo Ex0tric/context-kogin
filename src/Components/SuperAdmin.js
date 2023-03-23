@@ -1,15 +1,14 @@
 import {useContext, useEffect, useState} from 'react'
 import AuthContext from '../Context/AuthContext'
-import Header from './Header';
-import Sidebar from './Sidebar';
 import SuperDashboard from './SuperDashboard';
+import './SuperAdmin.css'
 
 function SuperAdmin() {
 
   let { userType, updateToken } = useContext(AuthContext)
   // let { isLoading, setLoading } = useState(true)
 
-  document.title = 'Super Admin';
+  document.title = 'Super Admin Dashboard';
 
   useEffect(()=>{
     updateToken()
@@ -36,6 +35,8 @@ function SuperAdmin() {
           {
             userType === 'is_super_admin'? 
             <>
+              {/* <Header/> */}
+              {/* <Sidebar/> */}
               <SuperDashboard/>
             </>
             : 

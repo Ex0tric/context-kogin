@@ -74,6 +74,7 @@ export const AuthProvider = ({children}) => {
     if (response.status === 200){
       setAccess(data.access)
       localStorage.setItem('access', JSON.stringify(data.access))
+      console.log(data.access)
       // return 'success';
     }else{
       logoutUser()

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import React, { useContext } from 'react'
-import AuthContext from '../Context/AuthContext'
+import { Link, Outlet } from 'react-router-dom';
+// import React, { useContext } from 'react'
+// import AuthContext from '../Context/AuthContext'
 import './Header.css'
 
 function Header() {

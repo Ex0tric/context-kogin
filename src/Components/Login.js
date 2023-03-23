@@ -6,12 +6,12 @@ const Login = () => {
   
   let {loginUser} = useContext(AuthContext)
 
-  document.title = 'Login'
+  document.title = 'Login | Audit System'
   
   return (
   <>
     <div className='sign-in-wrapper'>
-      <div className="form-container">
+      <div className="form-container">  
         <div className="form-heading">
           <h1 className='sign-heading text-center'>Sign in</h1>
         </div>

@@ -14,11 +14,9 @@ import { FaChevronCircleRight } from "react-icons/fa";
 
 function Sidebar() {
 
-
-
   let [toggle, setToggle] = useState('d-none')
 
-  let { logoutUser, user } = useContext(AuthContext)
+  let { logoutUser, user, userType } = useContext(AuthContext)
 
   function toggler(){
     toggle === 'd-none' ? 
@@ -43,18 +41,24 @@ function Sidebar() {
         </div>
 
         <div className="dashboard hover">
-          <Link className="list-items px-3 py-2 d-block">
+          <Link to={'/superadmin'} className="list-items px-3 py-2 d-block">
             <MdSpaceDashboard className='mr-2' color='#fff' size={'20px'}/>
             <span className="font-weight-light text-white sidebar-titles" size={'50px'}>Dashboard</span>
           </Link>
         </div>
 
-        <div className="add-client hover">
-          <Link className="list-items px-3 py-2 d-block">
+        {
+          userType === 'is_super_admin' ? 
+            (<div className="add-client hover">
+          <Link to={'/addclient'} className="list-items px-3 py-2 d-block">
             <AiOutlineUserAdd className='mr-2' color='#fff' size={'20px'}/>
             <span className="font-weight-light text-white sidebar-titles" size={'50px'}>Add Client</span>
           </Link>
-        </div>
+        </div>) : 
+          null
+        }
+
+        
 
         <div className="masters hover position-relative">
           <Link className="list-items px-3 py-2 d-block" onClick={toggler} >
