@@ -38,7 +38,7 @@ function SuperDashboard() {
     }
 }
 
-if(loading && userType==='is_super_admin'){
+if(loading && userType === 'is_super_admin'){
   return (
     <>
       <div className="super-dashboard">

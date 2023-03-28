@@ -1,0 +1,3 @@
+.info-box{display: flex; }
+.info-box-content{flex: 1 0 80%; padding-left: 10px;}
+.info-box-icon{flex: 1 0 20%; display: flex; justify-content: center; align-items: center;border-radius: 5px;padding: 15px;}

@@ -8,6 +8,7 @@ import { AuthProvider } from './Context/AuthContext';
 import NotFound from './Components/NotFound';
 import Layout from './Components/DashboardLayout'
 import AddClient from './Components/AddClient';
+import PartnerDashboard from './Components/PartnerDashboard';
 // import SuperDashboard from './Components/SuperDashboard';
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
             <Route element={<Layout/>}>
               <Route element={<SuperAdmin/>} path='/superadmin'/>
               <Route element={<Partner/>}  path='/partner'/>        
-              <Route element={<AddClient/>}  path='/addclient'/>    
+              <Route element={<AddClient/>}  path='/addclient'/>
+
             </Route>
           </Route>
           <Route path='*' element={<NotFound/>}/>

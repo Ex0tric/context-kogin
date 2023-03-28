@@ -1,9 +1,12 @@
 import React, {useContext, useEffect} from 'react'
 import AuthContext from '../Context/AuthContext'
+import PartnerDashboard from './PartnerDashboard';
 
 function Partner() {
 
   let {userType, updateToken} = useContext(AuthContext)
+
+  
 
   document.title = 'Partner';
 
@@ -17,6 +20,7 @@ function Partner() {
         {
           userType === 'is_partner' ? 
           <>
+          <PartnerDashboard/>
           </>
           : 
           <h1>You Don't Have Access of Partner</h1>

@@ -2,10 +2,13 @@ import {useContext, useEffect, useState} from 'react'
 import AuthContext from '../Context/AuthContext'
 import SuperDashboard from './SuperDashboard';
 import './SuperAdmin.css'
+import { useNavigate } from 'react-router-dom'
 
 function SuperAdmin() {
 
   let { userType, updateToken } = useContext(AuthContext)
+
+  let navigate = useNavigate();
   // let { isLoading, setLoading } = useState(true)
 
   document.title = 'Super Admin Dashboard';
@@ -30,20 +33,12 @@ function SuperAdmin() {
     //   return 'Failure';
     // }
     // else{
-      return (
-        <>
-          {
-            userType === 'is_super_admin'? 
-            <>
-              {/* <Header/> */}
-              {/* <Sidebar/> */}
-              <SuperDashboard/>
-            </>
-            : 
-            <h1>You Don't Have Access of SuperAdmin</h1>
-          }
-        </>
-      )
+
+    switch(userType){
+      case 'is_partner': return navigate('/partner');
+      case 'is_super_admin': return <SuperDashboard/>;
+      default: return 'Who are you?';
+      }
     // }
 
 }

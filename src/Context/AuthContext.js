@@ -1,4 +1,4 @@
-import { createContext, useState, useReducer } from 'react'
+import { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
@@ -24,7 +24,7 @@ export const AuthProvider = ({children}) => {
       let response = await fetch('http://192.168.0.169:8000/user/login/', {
           method:'POST',
           headers:{
-              'Content-Type':'application/json'
+            'Content-Type':'application/json'
           },
           body:JSON.stringify({'username':e.target.username.value, 'password':e.target.password.value})
       })
@@ -87,24 +87,16 @@ export const AuthProvider = ({children}) => {
   }
 
   let contextData = {
-      isLoading,
-      user,
-      userType,
-      access,
-      refresh,
-      loginUser,
-      logoutUser,
-      updateToken
+    isLoading,
+    user,
+    userType,
+    access,
+    refresh,
+    loginUser,
+    logoutUser,
+    updateToken
   }
 
-  // function dataReducer(contextData, action){
-  //   switch(action.type){
-  //     case 'UPDATE' : return { ...contextData} 
-  //     default: return contextData
-  //   }
-  // }
-
-  // const [contextData, dispatch] = useReducer(dataReducer, data);
 
   return(
     <AuthContext.Provider value={contextData} > 
